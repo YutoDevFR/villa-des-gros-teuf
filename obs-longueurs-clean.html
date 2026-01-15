@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBS Overlay - Longueurs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: transparent;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .overlay-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 0;
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95), rgba(20, 20, 40, 0.95));
+            border: 3px solid #00f0ff;
+            border-radius: 15px;
+            padding: 15px 30px;
+            box-shadow: 
+                0 0 20px rgba(0, 240, 255, 0.5),
+                0 0 40px rgba(0, 240, 255, 0.3),
+                inset 0 0 30px rgba(0, 240, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Effet de scan animé */
+        .overlay-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            animation: swim 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.8));
+        }
+
+        @keyframes swim {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(3px) rotate(5deg); }
+            75% { transform: translateX(-3px) rotate(-5deg); }
+        }
+
+        .label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.15em;
+            color: #00f0ff;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+            margin-right: 20px;
+            text-transform: uppercase;
+        }
+
+        .number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 
+                0 0 20px #00f0ff,
+                0 0 40px #00f0ff;
+            min-width: 80px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .number.pop {
+            animation: numberPop 0.3s ease;
+        }
+
+        @keyframes numberPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); color: #ffe600; text-shadow: 0 0 30px #ffe600; }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay-container" id="overlay">
+        <span class="icon">🏊</span>
+        <span class="label">Longueurs</span>
+        <span class="number" id="lapNumber">0</span>
+    </div>
+
+    <script>
+        // Configuration API - adapter l'URL selon l'environnement
+        const API_BASE = window.location.origin;
+
+        let lapCount = 0;
+        const lapNumberEl = document.getElementById('lapNumber');
+
+        function updateDisplay() {
+            lapNumberEl.textContent = lapCount;
+        }
+
+        async function fetchData() {
+            try {
+                const response = await fetch(`${API_BASE}/api/data`);
+                const data = await response.json();
+                lapCount = data.lapCount || 0;
+                updateDisplay();
+            } catch (error) {
+                console.error('Erreur fetch:', error);
+            }
+        }
+
+        async function addLap() {
+            try {
+                const response = await fetch(`${API_BASE}/api/lap/add`, { method: 'POST' });
+                const data = await response.json();
+                if (data.success) {
+                    lapCount = data.lapCount;
+                    lapNumberEl.classList.remove('pop');
+                    void lapNumberEl.offsetWidth;
+                    lapNumberEl.classList.add('pop');
+                    updateDisplay();
+                }
+            } catch (error) {
+                console.error('Erreur add lap:', error);
+            }
+        }
+
+        async function removeLap() {
+            try {
+                const response = await fetch(`${API_BASE}/api/lap/remove`, { method: 'POST' });
+                const data = await response.json();
+                if (data.success) {
+                    lapCount = data.lapCount;
+                    updateDisplay();
+                }
+            } catch (error) {
+                console.error('Erreur remove lap:', error);
+            }
+        }
+
+        // Click gauche = +1, Click droit = -1
+        document.getElementById('overlay').addEventListener('click', function(e) {
+            addLap();
+        });
+
+        document.getElementById('overlay').addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            removeLap();
+        });
+
+        // Rafraîchir périodiquement pour sync avec le serveur
+        setInterval(fetchData, 2000);
+
+        // Initialisation
+        fetchData();
+    </script>
+</body>
