@@ -12,24 +12,18 @@
             --neon-purple: #b94aff;
             --neon-green: #00ff88;
             --neon-red: #ff4444;
+            --neon-yellow: #ffe600;
             --dark-bg: #0a0a0f;
             --card-bg: rgba(15, 15, 25, 0.95);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Rajdhani', sans-serif;
             background: var(--dark-bg);
             color: #fff;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
         }
 
@@ -38,13 +32,14 @@
             border: 2px solid var(--neon-purple);
             border-radius: 20px;
             padding: 40px;
-            width: 100%;
             max-width: 500px;
+            margin: 100px auto;
             box-shadow: 0 0 40px rgba(185, 74, 255, 0.3);
         }
 
         .admin-container {
-            max-width: 600px;
+            max-width: 900px;
+            margin: 20px auto;
         }
 
         h1 {
@@ -56,70 +51,64 @@
             text-shadow: 0 0 20px rgba(185, 74, 255, 0.5);
         }
 
-        .form-group {
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neon-cyan);
             margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
         }
+
+        .form-group { margin-bottom: 15px; }
 
         label {
             display: block;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
 
-        input[type="password"], input[type="number"] {
+        input, textarea, select {
             width: 100%;
             background: rgba(0, 0, 0, 0.3);
             border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 15px;
+            border-radius: 8px;
+            padding: 12px;
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #fff;
             outline: none;
             transition: all 0.3s ease;
         }
 
-        input:focus {
+        textarea { resize: vertical; min-height: 60px; }
+
+        input:focus, textarea:focus, select:focus {
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
         }
 
         .btn {
-            width: 100%;
-            padding: 15px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(255, 45, 106, 0.5);
-        }
-
-        .btn-success {
-            background: var(--neon-green);
-            color: var(--dark-bg);
-        }
-
-        .btn-danger {
-            background: var(--neon-red);
-            color: #fff;
-        }
+        .btn-primary { background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple)); color: #fff; }
+        .btn-primary:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(255, 45, 106, 0.5); }
+        .btn-success { background: var(--neon-green); color: var(--dark-bg); }
+        .btn-danger { background: var(--neon-red); color: #fff; }
+        .btn-cyan { background: var(--neon-cyan); color: var(--dark-bg); }
+        .btn-small { padding: 8px 12px; font-size: 0.85rem; }
 
         .error {
             background: rgba(255, 68, 68, 0.2);
@@ -131,74 +120,40 @@
             text-align: center;
         }
 
-        .hidden {
-            display: none;
-        }
+        .hidden { display: none !important; }
 
         .section {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-        }
-
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--neon-cyan);
+            padding: 20px;
             margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
         }
 
         .current-value {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #fff;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-shadow: 0 0 20px var(--neon-cyan);
         }
 
         .btn-group {
             display: flex;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
         }
 
-        .btn-group .btn {
-            flex: 1;
-            padding: 12px;
-        }
-
-        .btn-add {
-            background: var(--neon-cyan);
-            color: var(--dark-bg);
-        }
-
-        .btn-remove {
-            background: var(--neon-pink);
-            color: #fff;
-        }
-
-        .btn-set {
-            background: var(--neon-purple);
-            color: #fff;
-        }
+        .btn-group .btn { flex: 1; min-width: 80px; }
 
         .input-row {
             display: flex;
             gap: 10px;
         }
 
-        .input-row input {
-            flex: 1;
-        }
-
-        .input-row .btn {
-            width: auto;
-            padding: 15px 25px;
-        }
+        .input-row input { flex: 1; }
+        .input-row .btn { width: auto; }
 
         .logout-btn {
             position: fixed;
@@ -211,13 +166,10 @@
             border-radius: 8px;
             cursor: pointer;
             font-family: 'Rajdhani', sans-serif;
-            transition: all 0.3s ease;
+            z-index: 100;
         }
 
-        .logout-btn:hover {
-            border-color: var(--neon-red);
-            color: var(--neon-red);
-        }
+        .logout-btn:hover { border-color: var(--neon-red); color: var(--neon-red); }
 
         .status {
             text-align: center;
@@ -225,21 +177,138 @@
             border-radius: 8px;
             margin-top: 10px;
             font-weight: 600;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            min-width: 200px;
         }
 
-        .status.success {
-            background: rgba(0, 255, 136, 0.2);
-            color: var(--neon-green);
+        .status.success { background: rgba(0, 255, 136, 0.9); color: var(--dark-bg); }
+        .status.error { background: rgba(255, 68, 68, 0.9); color: #fff; }
+
+        /* Items list */
+        .items-list { margin-bottom: 20px; }
+
+        .item-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
         }
 
-        .status.error {
-            background: rgba(255, 68, 68, 0.2);
-            color: var(--neon-red);
+        .item-card:hover { border-color: var(--neon-cyan); }
+        .item-card.special { border-color: var(--neon-yellow); }
+
+        .item-icon { font-size: 2rem; }
+
+        .item-info { flex: 1; }
+
+        .item-amount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--neon-cyan);
+        }
+
+        .item-card.special .item-amount { color: var(--neon-yellow); }
+
+        .item-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 5px;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Add form */
+        .add-form {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px dashed var(--neon-cyan);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .add-form h3 {
+            color: var(--neon-cyan);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-row.full { grid-template-columns: 1fr; }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .checkbox-row input[type="checkbox"] {
+            width: auto;
+            accent-color: var(--neon-yellow);
+        }
+
+        /* Edit modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-purple);
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 0 40px rgba(185, 74, 255, 0.5);
+        }
+
+        .modal h3 {
+            color: var(--neon-purple);
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-actions .btn { flex: 1; }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+            .item-card { flex-direction: column; text-align: center; }
+            .item-actions { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
-    <!-- Login Form -->
+    <!-- Login -->
     <div class="login-container" id="loginContainer">
         <h1>Admin Login</h1>
         <div class="error hidden" id="loginError"></div>
@@ -247,7 +316,7 @@
             <label>Token Admin</label>
             <input type="password" id="tokenInput" placeholder="Entrez le token admin">
         </div>
-        <button class="btn btn-primary" onclick="login()">Connexion</button>
+        <button class="btn btn-primary" style="width:100%" onclick="login()">Connexion</button>
     </div>
 
     <!-- Admin Panel -->
@@ -255,52 +324,113 @@
         <button class="logout-btn" onclick="logout()">Deconnexion</button>
         <h1>Stream Control</h1>
 
-        <!-- Longueurs Section -->
+        <!-- Longueurs -->
         <div class="section">
-            <div class="section-title">Longueurs de Piscine</div>
+            <h2>Longueurs de Piscine</h2>
             <div class="current-value" id="lapDisplay">0</div>
             <div class="btn-group">
-                <button class="btn btn-remove" onclick="removeLap()">- 1</button>
-                <button class="btn btn-add" onclick="addLap()">+ 1</button>
-            </div>
-            <div class="btn-group">
-                <button class="btn btn-remove" onclick="removeLaps(10)">- 10</button>
-                <button class="btn btn-add" onclick="addLaps(10)">+ 10</button>
+                <button class="btn btn-danger" onclick="removeLaps(10)">-10</button>
+                <button class="btn btn-danger" onclick="removeLap()">-1</button>
+                <button class="btn btn-success" onclick="addLap()">+1</button>
+                <button class="btn btn-success" onclick="addLaps(10)">+10</button>
             </div>
             <div class="input-row">
                 <input type="number" id="lapInput" placeholder="Valeur" min="0">
-                <button class="btn btn-set" onclick="setLaps()">Definir</button>
+                <button class="btn btn-cyan" onclick="setLaps()">Definir</button>
             </div>
         </div>
 
-        <!-- Cagnotte Section -->
+        <!-- Cagnotte -->
         <div class="section">
-            <div class="section-title">Cagnotte</div>
+            <h2>Cagnotte</h2>
             <div class="current-value" id="cagnotteDisplay">0 EUR</div>
             <div class="input-row">
                 <input type="number" id="cagnotteInput" placeholder="Montant" min="0" step="0.01">
-                <button class="btn btn-set" onclick="setCagnotte()">Definir</button>
+                <button class="btn btn-cyan" onclick="setCagnotte()">Definir</button>
             </div>
         </div>
 
-        <div class="status hidden" id="statusMessage"></div>
+        <!-- Paliers de dons -->
+        <div class="section">
+            <h2>Paliers de Dons</h2>
+            <div class="items-list" id="donations-list"></div>
+            <div class="add-form">
+                <h3>Ajouter un palier</h3>
+                <div class="form-row">
+                    <input type="number" id="newDonationAmount" placeholder="Montant" min="1">
+                    <input type="text" id="newDonationIcon" placeholder="Emoji (ex: 🎁)" maxlength="4">
+                </div>
+                <div class="form-row full">
+                    <textarea id="newDonationDesc" placeholder="Description du palier"></textarea>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="newDonationSpecial">
+                    <label for="newDonationSpecial" style="margin:0">Palier special (mise en avant)</label>
+                </div>
+                <button class="btn btn-success" onclick="addDonation()">Ajouter le palier</button>
+            </div>
+        </div>
+
+        <!-- Objectifs cagnotte -->
+        <div class="section">
+            <h2>Objectifs Cagnotte</h2>
+            <div class="items-list" id="goals-list"></div>
+            <div class="add-form">
+                <h3>Ajouter un objectif</h3>
+                <div class="form-row">
+                    <input type="number" id="newGoalAmount" placeholder="Montant" min="1">
+                    <input type="text" id="newGoalIcon" placeholder="Emoji (ex: 🎯)" maxlength="4">
+                </div>
+                <div class="form-row full">
+                    <textarea id="newGoalDesc" placeholder="Description de l'objectif"></textarea>
+                </div>
+                <button class="btn btn-success" onclick="addGoal()">Ajouter l'objectif</button>
+            </div>
+        </div>
     </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay hidden" id="editModal">
+        <div class="modal">
+            <h3 id="modalTitle">Modifier</h3>
+            <div class="form-group">
+                <label>Montant (EUR)</label>
+                <input type="number" id="editAmount" min="1">
+            </div>
+            <div class="form-group">
+                <label>Emoji</label>
+                <input type="text" id="editIcon" maxlength="4">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="editDesc"></textarea>
+            </div>
+            <div class="checkbox-row hidden" id="editSpecialRow">
+                <input type="checkbox" id="editSpecial">
+                <label for="editSpecial" style="margin:0">Palier special</label>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-danger" onclick="closeModal()">Annuler</button>
+                <button class="btn btn-success" onclick="saveEdit()">Sauvegarder</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="status hidden" id="statusMessage"></div>
 
     <script>
         const API_BASE = window.location.origin;
         let adminToken = localStorage.getItem('adminToken') || '';
+        let donations = [];
+        let goals = [];
+        let editingType = null;
+        let editingId = null;
 
-        // Check if already logged in
-        if (adminToken) {
-            verifyToken();
-        }
+        if (adminToken) verifyToken();
 
         async function login() {
             const token = document.getElementById('tokenInput').value;
-            if (!token) {
-                showLoginError('Token requis');
-                return;
-            }
+            if (!token) return showLoginError('Token requis');
 
             try {
                 const response = await fetch(`${API_BASE}/api/admin/verify`, {
@@ -308,9 +438,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ token })
                 });
-
                 const data = await response.json();
-
                 if (response.ok && data.success) {
                     adminToken = token;
                     localStorage.setItem('adminToken', token);
@@ -319,9 +447,7 @@
                 } else {
                     showLoginError(data.error || 'Token invalide');
                 }
-            } catch (error) {
-                showLoginError('Erreur de connexion');
-            }
+            } catch { showLoginError('Erreur de connexion'); }
         }
 
         async function verifyToken() {
@@ -331,16 +457,9 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ token: adminToken })
                 });
-
-                if (response.ok) {
-                    showAdminPanel();
-                    fetchData();
-                } else {
-                    logout();
-                }
-            } catch {
-                logout();
-            }
+                if (response.ok) { showAdminPanel(); fetchData(); }
+                else logout();
+            } catch { logout(); }
         }
 
         function logout() {
@@ -357,17 +476,17 @@
         }
 
         function showLoginError(msg) {
-            const errorEl = document.getElementById('loginError');
-            errorEl.textContent = msg;
-            errorEl.classList.remove('hidden');
+            const el = document.getElementById('loginError');
+            el.textContent = msg;
+            el.classList.remove('hidden');
         }
 
         function showStatus(msg, isError = false) {
-            const statusEl = document.getElementById('statusMessage');
-            statusEl.textContent = msg;
-            statusEl.className = `status ${isError ? 'error' : 'success'}`;
-            statusEl.classList.remove('hidden');
-            setTimeout(() => statusEl.classList.add('hidden'), 3000);
+            const el = document.getElementById('statusMessage');
+            el.textContent = msg;
+            el.className = `status ${isError ? 'error' : 'success'}`;
+            el.classList.remove('hidden');
+            setTimeout(() => el.classList.add('hidden'), 3000);
         }
 
         async function fetchData() {
@@ -375,124 +494,203 @@
                 const response = await fetch(`${API_BASE}/api/data`);
                 const data = await response.json();
                 document.getElementById('lapDisplay').textContent = data.lapCount || 0;
-                document.getElementById('cagnotteDisplay').textContent =
-                    (data.cagnotte || 0).toLocaleString('fr-FR') + ' EUR';
-            } catch (error) {
-                console.error('Fetch error:', error);
-            }
+                document.getElementById('cagnotteDisplay').textContent = (data.cagnotte || 0).toLocaleString('fr-FR') + ' EUR';
+                donations = data.donations || [];
+                goals = data.goals || [];
+                renderDonations();
+                renderGoals();
+            } catch (e) { console.error(e); }
         }
 
-        async function apiCall(endpoint, body = {}) {
+        async function apiCall(endpoint, method = 'POST', body = {}) {
             try {
                 const response = await fetch(`${API_BASE}${endpoint}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${adminToken}`
-                    },
-                    body: JSON.stringify(body)
+                    method,
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${adminToken}` },
+                    body: method !== 'DELETE' ? JSON.stringify(body) : undefined
                 });
-
                 const data = await response.json();
-
-                if (response.status === 401 || response.status === 403) {
-                    showStatus('Session expiree', true);
-                    logout();
-                    return null;
-                }
-
-                if (!response.ok) {
-                    showStatus(data.error || 'Erreur', true);
-                    return null;
-                }
-
+                if (response.status === 401 || response.status === 403) { showStatus('Session expiree', true); logout(); return null; }
+                if (!response.ok) { showStatus(data.error || 'Erreur', true); return null; }
                 return data;
-            } catch (error) {
-                showStatus('Erreur de connexion', true);
-                return null;
-            }
+            } catch { showStatus('Erreur connexion', true); return null; }
         }
 
+        // Longueurs
         async function addLap() {
-            const data = await apiCall('/api/admin/lap/add', { count: 1 });
-            if (data) {
-                document.getElementById('lapDisplay').textContent = data.lapCount;
-                showStatus('Longueur ajoutee');
-            }
+            const data = await apiCall('/api/admin/lap/add', 'POST', { count: 1 });
+            if (data) { document.getElementById('lapDisplay').textContent = data.lapCount; showStatus('+1 longueur'); }
         }
-
-        async function addLaps(count) {
-            const data = await apiCall('/api/admin/lap/add', { count });
-            if (data) {
-                document.getElementById('lapDisplay').textContent = data.lapCount;
-                showStatus(`${count} longueurs ajoutees`);
-            }
+        async function addLaps(n) {
+            const data = await apiCall('/api/admin/lap/add', 'POST', { count: n });
+            if (data) { document.getElementById('lapDisplay').textContent = data.lapCount; showStatus(`+${n} longueurs`); }
         }
-
         async function removeLap() {
-            const data = await apiCall('/api/admin/lap/remove', { count: 1 });
-            if (data) {
-                document.getElementById('lapDisplay').textContent = data.lapCount;
-                showStatus('Longueur retiree');
-            }
+            const data = await apiCall('/api/admin/lap/remove', 'POST', { count: 1 });
+            if (data) { document.getElementById('lapDisplay').textContent = data.lapCount; showStatus('-1 longueur'); }
         }
-
-        async function removeLaps(count) {
-            const data = await apiCall('/api/admin/lap/remove', { count });
-            if (data) {
-                document.getElementById('lapDisplay').textContent = data.lapCount;
-                showStatus(`${count} longueurs retirees`);
-            }
+        async function removeLaps(n) {
+            const data = await apiCall('/api/admin/lap/remove', 'POST', { count: n });
+            if (data) { document.getElementById('lapDisplay').textContent = data.lapCount; showStatus(`-${n} longueurs`); }
         }
-
         async function setLaps() {
-            const input = document.getElementById('lapInput');
-            const value = parseInt(input.value);
-            if (isNaN(value) || value < 0) {
-                showStatus('Valeur invalide', true);
-                return;
-            }
-
-            const data = await apiCall('/api/admin/lap/set', { count: value });
-            if (data) {
-                document.getElementById('lapDisplay').textContent = data.lapCount;
-                input.value = '';
-                showStatus('Longueurs definies');
-            }
+            const val = parseInt(document.getElementById('lapInput').value);
+            if (isNaN(val) || val < 0) return showStatus('Valeur invalide', true);
+            const data = await apiCall('/api/admin/lap/set', 'POST', { count: val });
+            if (data) { document.getElementById('lapDisplay').textContent = data.lapCount; document.getElementById('lapInput').value = ''; showStatus('Longueurs definies'); }
         }
 
+        // Cagnotte
         async function setCagnotte() {
-            const input = document.getElementById('cagnotteInput');
-            const value = parseFloat(input.value);
-            if (isNaN(value) || value < 0) {
-                showStatus('Montant invalide', true);
-                return;
-            }
+            const val = parseFloat(document.getElementById('cagnotteInput').value);
+            if (isNaN(val) || val < 0) return showStatus('Montant invalide', true);
+            const data = await apiCall('/api/admin/cagnotte', 'POST', { amount: val });
+            if (data) { document.getElementById('cagnotteDisplay').textContent = data.cagnotte.toLocaleString('fr-FR') + ' EUR'; document.getElementById('cagnotteInput').value = ''; showStatus('Cagnotte mise a jour'); }
+        }
 
-            const data = await apiCall('/api/admin/cagnotte', { amount: value });
+        // Donations
+        function renderDonations() {
+            const container = document.getElementById('donations-list');
+            if (!donations.length) { container.innerHTML = '<p style="color:rgba(255,255,255,0.5)">Aucun palier</p>'; return; }
+            container.innerHTML = donations.map(d => `
+                <div class="item-card ${d.special ? 'special' : ''}">
+                    <span class="item-icon">${d.icon}</span>
+                    <div class="item-info">
+                        <div class="item-amount">${d.amount} EUR ${d.special ? '(Special)' : ''}</div>
+                        <div class="item-description">${d.description}</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-cyan btn-small" onclick="editDonation(${d.id})">Modifier</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteDonation(${d.id})">Suppr</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function addDonation() {
+            const amount = parseFloat(document.getElementById('newDonationAmount').value);
+            const icon = document.getElementById('newDonationIcon').value || '🎁';
+            const description = document.getElementById('newDonationDesc').value;
+            const special = document.getElementById('newDonationSpecial').checked;
+            if (!amount || !description) return showStatus('Montant et description requis', true);
+            const data = await apiCall('/api/admin/donations', 'POST', { amount, icon, description, special });
             if (data) {
-                document.getElementById('cagnotteDisplay').textContent =
-                    data.cagnotte.toLocaleString('fr-FR') + ' EUR';
-                input.value = '';
-                showStatus('Cagnotte mise a jour');
+                donations = data.donations;
+                renderDonations();
+                document.getElementById('newDonationAmount').value = '';
+                document.getElementById('newDonationIcon').value = '';
+                document.getElementById('newDonationDesc').value = '';
+                document.getElementById('newDonationSpecial').checked = false;
+                showStatus('Palier ajoute');
             }
         }
 
-        // Enter key handlers
-        document.getElementById('tokenInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') login();
-        });
+        function editDonation(id) {
+            const d = donations.find(x => x.id === id);
+            if (!d) return;
+            editingType = 'donation';
+            editingId = id;
+            document.getElementById('modalTitle').textContent = 'Modifier le palier';
+            document.getElementById('editAmount').value = d.amount;
+            document.getElementById('editIcon').value = d.icon;
+            document.getElementById('editDesc').value = d.description;
+            document.getElementById('editSpecial').checked = d.special;
+            document.getElementById('editSpecialRow').classList.remove('hidden');
+            document.getElementById('editModal').classList.remove('hidden');
+        }
 
-        document.getElementById('lapInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') setLaps();
-        });
+        async function deleteDonation(id) {
+            if (!confirm('Supprimer ce palier ?')) return;
+            const data = await apiCall(`/api/admin/donations/${id}`, 'DELETE');
+            if (data) { donations = data.donations; renderDonations(); showStatus('Palier supprime'); }
+        }
 
-        document.getElementById('cagnotteInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') setCagnotte();
-        });
+        // Goals
+        function renderGoals() {
+            const container = document.getElementById('goals-list');
+            if (!goals.length) { container.innerHTML = '<p style="color:rgba(255,255,255,0.5)">Aucun objectif</p>'; return; }
+            container.innerHTML = goals.map(g => `
+                <div class="item-card">
+                    <span class="item-icon">${g.icon}</span>
+                    <div class="item-info">
+                        <div class="item-amount">${g.amount.toLocaleString('fr-FR')} EUR</div>
+                        <div class="item-description">${g.description}</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-cyan btn-small" onclick="editGoal(${g.id})">Modifier</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteGoal(${g.id})">Suppr</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function addGoal() {
+            const amount = parseFloat(document.getElementById('newGoalAmount').value);
+            const icon = document.getElementById('newGoalIcon').value || '🎯';
+            const description = document.getElementById('newGoalDesc').value;
+            if (!amount || !description) return showStatus('Montant et description requis', true);
+            const data = await apiCall('/api/admin/goals', 'POST', { amount, icon, description });
+            if (data) {
+                goals = data.goals;
+                renderGoals();
+                document.getElementById('newGoalAmount').value = '';
+                document.getElementById('newGoalIcon').value = '';
+                document.getElementById('newGoalDesc').value = '';
+                showStatus('Objectif ajoute');
+            }
+        }
+
+        function editGoal(id) {
+            const g = goals.find(x => x.id === id);
+            if (!g) return;
+            editingType = 'goal';
+            editingId = id;
+            document.getElementById('modalTitle').textContent = 'Modifier l\'objectif';
+            document.getElementById('editAmount').value = g.amount;
+            document.getElementById('editIcon').value = g.icon;
+            document.getElementById('editDesc').value = g.description;
+            document.getElementById('editSpecialRow').classList.add('hidden');
+            document.getElementById('editModal').classList.remove('hidden');
+        }
+
+        async function deleteGoal(id) {
+            if (!confirm('Supprimer cet objectif ?')) return;
+            const data = await apiCall(`/api/admin/goals/${id}`, 'DELETE');
+            if (data) { goals = data.goals; renderGoals(); showStatus('Objectif supprime'); }
+        }
+
+        // Modal
+        function closeModal() {
+            document.getElementById('editModal').classList.add('hidden');
+            editingType = null;
+            editingId = null;
+        }
+
+        async function saveEdit() {
+            const amount = parseFloat(document.getElementById('editAmount').value);
+            const icon = document.getElementById('editIcon').value;
+            const description = document.getElementById('editDesc').value;
+            if (!amount || !description) return showStatus('Champs requis', true);
+
+            let data;
+            if (editingType === 'donation') {
+                const special = document.getElementById('editSpecial').checked;
+                data = await apiCall(`/api/admin/donations/${editingId}`, 'PUT', { amount, icon, description, special });
+                if (data) { donations = data.donations; renderDonations(); }
+            } else {
+                data = await apiCall(`/api/admin/goals/${editingId}`, 'PUT', { amount, icon, description });
+                if (data) { goals = data.goals; renderGoals(); }
+            }
+            if (data) { closeModal(); showStatus('Modifie avec succes'); }
+        }
+
+        // Keyboard
+        document.getElementById('tokenInput').addEventListener('keypress', e => { if (e.key === 'Enter') login(); });
+        document.getElementById('lapInput').addEventListener('keypress', e => { if (e.key === 'Enter') setLaps(); });
+        document.getElementById('cagnotteInput').addEventListener('keypress', e => { if (e.key === 'Enter') setCagnotte(); });
 
         // Auto refresh
-        setInterval(fetchData, 5000);
+        setInterval(fetchData, 10000);
     </script>
 </body>
 </html>
