@@ -324,9 +324,9 @@
         <button class="logout-btn" onclick="logout()">Deconnexion</button>
         <h1>Stream Control</h1>
 
-        <!-- Longueurs -->
+        <!-- Longueurs a faire -->
         <div class="section">
-            <h2>Longueurs de Piscine</h2>
+            <h2>Longueurs a Faire</h2>
             <div class="current-value" id="lapDisplay">0</div>
             <div class="btn-group">
                 <button class="btn btn-danger" onclick="removeLaps(10)">-10</button>
@@ -337,6 +337,22 @@
             <div class="input-row">
                 <input type="number" id="lapInput" placeholder="Valeur" min="0">
                 <button class="btn btn-cyan" onclick="setLaps()">Definir</button>
+            </div>
+        </div>
+
+        <!-- Longueurs faites -->
+        <div class="section">
+            <h2>Longueurs Faites</h2>
+            <div class="current-value" id="lapsDoneDisplay" style="color:#00ff88;text-shadow:0 0 20px #00ff88">0</div>
+            <div class="btn-group">
+                <button class="btn btn-danger" onclick="removeLapsDone(10)">-10</button>
+                <button class="btn btn-danger" onclick="removeLapsDone(1)">-1</button>
+                <button class="btn btn-success" onclick="addLapsDone(1)">+1</button>
+                <button class="btn btn-success" onclick="addLapsDone(10)">+10</button>
+            </div>
+            <div class="input-row">
+                <input type="number" id="lapsDoneInput" placeholder="Valeur" min="0">
+                <button class="btn btn-cyan" onclick="setLapsDone()">Definir</button>
             </div>
         </div>
 
@@ -494,6 +510,7 @@
                 const response = await fetch(`${API_BASE}/api/data`);
                 const data = await response.json();
                 document.getElementById('lapDisplay').textContent = data.lapCount || 0;
+                document.getElementById('lapsDoneDisplay').textContent = data.lapsDone || 0;
                 document.getElementById('cagnotteDisplay').textContent = (data.cagnotte || 0).toLocaleString('fr-FR') + ' EUR';
                 donations = data.donations || [];
                 goals = data.goals || [];
@@ -538,6 +555,22 @@
             if (isNaN(val) || val < 0) return showStatus('Valeur invalide', true);
             const data = await apiCall('/api/admin/lap/set', 'POST', { count: val });
             if (data) { document.getElementById('lapDisplay').textContent = data.lapCount; document.getElementById('lapInput').value = ''; showStatus('Longueurs definies'); }
+        }
+
+        // Longueurs faites
+        async function addLapsDone(n) {
+            const data = await apiCall('/api/admin/lapsdone/add', 'POST', { count: n });
+            if (data) { document.getElementById('lapsDoneDisplay').textContent = data.lapsDone; showStatus(`+${n} longueur(s) faite(s)`); }
+        }
+        async function removeLapsDone(n) {
+            const data = await apiCall('/api/admin/lapsdone/remove', 'POST', { count: n });
+            if (data) { document.getElementById('lapsDoneDisplay').textContent = data.lapsDone; showStatus(`-${n} longueur(s) faite(s)`); }
+        }
+        async function setLapsDone() {
+            const val = parseInt(document.getElementById('lapsDoneInput').value);
+            if (isNaN(val) || val < 0) return showStatus('Valeur invalide', true);
+            const data = await apiCall('/api/admin/lapsdone/set', 'POST', { count: val });
+            if (data) { document.getElementById('lapsDoneDisplay').textContent = data.lapsDone; document.getElementById('lapsDoneInput').value = ''; showStatus('Longueurs faites definies'); }
         }
 
         // Cagnotte
@@ -687,6 +720,7 @@
         // Keyboard
         document.getElementById('tokenInput').addEventListener('keypress', e => { if (e.key === 'Enter') login(); });
         document.getElementById('lapInput').addEventListener('keypress', e => { if (e.key === 'Enter') setLaps(); });
+        document.getElementById('lapsDoneInput').addEventListener('keypress', e => { if (e.key === 'Enter') setLapsDone(); });
         document.getElementById('cagnotteInput').addEventListener('keypress', e => { if (e.key === 'Enter') setCagnotte(); });
 
         // Auto refresh

@@ -66,6 +66,7 @@ if (!fs.existsSync(dataDir)) {
 // Donnees par defaut
 const DEFAULT_DATA = {
     lapCount: 0,
+    lapsDone: 0,
     cagnotte: 0,
     donations: [
         { id: 1, amount: 50, icon: "🍔", description: "Video degustation a regarder (1 minute) - Je regarde sans pouvoir manger !", special: false },
@@ -90,7 +91,7 @@ function initDataFile() {
     if (!fs.existsSync(DATA_FILE)) {
         fs.writeFileSync(DATA_FILE, JSON.stringify(DEFAULT_DATA, null, 2));
     } else {
-        // Migration: ajouter donations/goals si absents
+        // Migration: ajouter champs manquants
         const data = readData();
         let updated = false;
         if (!data.donations) {
@@ -99,6 +100,10 @@ function initDataFile() {
         }
         if (!data.goals) {
             data.goals = DEFAULT_DATA.goals;
+            updated = true;
+        }
+        if (data.lapsDone === undefined) {
+            data.lapsDone = 0;
             updated = true;
         }
         if (updated) saveData(data);
@@ -136,6 +141,7 @@ app.get('/api/data', (req, res) => {
     const data = readData();
     res.json({
         lapCount: data.lapCount,
+        lapsDone: data.lapsDone || 0,
         cagnotte: data.cagnotte,
         donations: data.donations,
         goals: data.goals,
@@ -195,6 +201,31 @@ app.post('/api/admin/lap/set', requireAdmin, (req, res) => {
     const data = readData();
     data.lapCount = Math.max(0, parseInt(req.body.count) || 0);
     if (saveData(data)) res.json({ success: true, lapCount: data.lapCount });
+    else res.status(500).json({ error: 'Erreur sauvegarde' });
+});
+
+// ============ ADMIN: LONGUEURS FAITES ============
+
+app.post('/api/admin/lapsdone/add', requireAdmin, (req, res) => {
+    const data = readData();
+    const count = parseInt(req.body.count) || 1;
+    data.lapsDone = (data.lapsDone || 0) + count;
+    if (saveData(data)) res.json({ success: true, lapsDone: data.lapsDone });
+    else res.status(500).json({ error: 'Erreur sauvegarde' });
+});
+
+app.post('/api/admin/lapsdone/remove', requireAdmin, (req, res) => {
+    const data = readData();
+    const count = parseInt(req.body.count) || 1;
+    data.lapsDone = Math.max(0, (data.lapsDone || 0) - count);
+    if (saveData(data)) res.json({ success: true, lapsDone: data.lapsDone });
+    else res.status(500).json({ error: 'Erreur sauvegarde' });
+});
+
+app.post('/api/admin/lapsdone/set', requireAdmin, (req, res) => {
+    const data = readData();
+    data.lapsDone = Math.max(0, parseInt(req.body.count) || 0);
+    if (saveData(data)) res.json({ success: true, lapsDone: data.lapsDone });
     else res.status(500).json({ error: 'Erreur sauvegarde' });
 });
 
