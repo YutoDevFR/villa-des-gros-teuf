@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔥 Donation Goals - Live Stream</title>
+    <title>Donation Goals - Live Stream</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -31,14 +31,13 @@
             overflow-x: hidden;
         }
 
-        /* Background animé */
         .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 linear-gradient(90deg, rgba(255, 45, 106, 0.03) 1px, transparent 1px),
                 linear-gradient(rgba(255, 45, 106, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
@@ -57,7 +56,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 radial-gradient(ellipse at 20% 20%, rgba(185, 74, 255, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 80%, rgba(255, 45, 106, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse at 50% 50%, rgba(0, 240, 255, 0.05) 0%, transparent 70%);
@@ -72,7 +71,6 @@
             padding: 40px 20px;
         }
 
-        /* Header */
         .header {
             text-align: center;
             margin-bottom: 60px;
@@ -88,7 +86,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: none;
             filter: drop-shadow(0 0 30px rgba(255, 45, 106, 0.5));
             animation: titlePulse 3s ease-in-out infinite;
         }
@@ -107,107 +104,6 @@
             opacity: 0.8;
         }
 
-        /* Overlay Compteur de Longueurs */
-        .lap-counter-overlay {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: var(--card-bg);
-            border: 2px solid var(--neon-cyan);
-            border-radius: 20px;
-            padding: 25px 35px;
-            box-shadow: var(--glow-cyan), inset 0 0 50px rgba(0, 240, 255, 0.05);
-            backdrop-filter: blur(10px);
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.3s ease;
-        }
-
-        .lap-counter-overlay:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(0, 240, 255, 0.8), 0 0 80px rgba(0, 240, 255, 0.4);
-        }
-
-        .lap-counter-overlay:active {
-            transform: scale(0.95);
-        }
-
-        .lap-counter-label {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 0.2em;
-            color: var(--neon-cyan);
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        .lap-counter-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            font-weight: 900;
-            color: #fff;
-            text-align: center;
-            text-shadow: 0 0 20px var(--neon-cyan);
-            line-height: 1;
-        }
-
-        .lap-counter-hint {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.5);
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .lap-counter-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .lap-btn {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 700;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .lap-btn.add {
-            background: var(--neon-cyan);
-            color: var(--dark-bg);
-        }
-
-        .lap-btn.add:hover {
-            box-shadow: 0 0 20px var(--neon-cyan);
-        }
-
-        .lap-btn.remove {
-            background: var(--neon-pink);
-            color: #fff;
-        }
-
-        .lap-btn.remove:hover {
-            box-shadow: 0 0 20px var(--neon-pink);
-        }
-
-        .lap-btn.reset {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.8rem;
-        }
-
-        .lap-btn.reset:hover {
-            border-color: var(--neon-yellow);
-            color: var(--neon-yellow);
-        }
-
-        /* Section Info Réveil */
         .wake-up-info {
             background: linear-gradient(135deg, rgba(255, 45, 106, 0.2), rgba(185, 74, 255, 0.2));
             border: 2px solid var(--neon-pink);
@@ -229,10 +125,6 @@
             font-size: 1.8rem;
             color: var(--neon-pink);
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
         }
 
         .wake-up-info p {
@@ -240,7 +132,6 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Section Titre */
         .section-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
@@ -262,7 +153,6 @@
             border-color: var(--neon-purple);
         }
 
-        /* Cartes de Donation */
         .donations-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -325,7 +215,6 @@
             opacity: 0.3;
         }
 
-        /* Donation spéciale 1000€ */
         .donation-card.special {
             background: linear-gradient(135deg, rgba(255, 230, 0, 0.1), rgba(255, 45, 106, 0.1));
             border: 2px solid var(--neon-yellow);
@@ -346,7 +235,6 @@
             text-shadow: 0 0 30px rgba(255, 230, 0, 0.7);
         }
 
-        /* Objectifs Cagnotte */
         .goals-section {
             margin-top: 60px;
         }
@@ -436,7 +324,6 @@
             margin-right: 15px;
         }
 
-        /* Cagnotte Tracker */
         .cagnotte-tracker {
             background: linear-gradient(135deg, rgba(185, 74, 255, 0.2), rgba(0, 240, 255, 0.1));
             border: 2px solid var(--neon-purple);
@@ -463,64 +350,6 @@
             text-shadow: 0 0 30px var(--neon-purple);
         }
 
-        .cagnotte-input-group {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .cagnotte-input {
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--neon-cyan);
-            border-radius: 15px;
-            padding: 15px 25px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: var(--neon-cyan);
-            width: 200px;
-            text-align: center;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .cagnotte-input:focus {
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
-        }
-
-        .update-btn {
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
-            border: none;
-            border-radius: 15px;
-            padding: 15px 40px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .update-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 45, 106, 0.5);
-        }
-
-        /* Animation d'ajout de longueur */
-        .lap-added {
-            animation: lapPop 0.3s ease;
-        }
-
-        @keyframes lapPop {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); color: var(--neon-yellow); }
-            100% { transform: scale(1); }
-        }
-
-        /* Footer */
         .footer {
             text-align: center;
             margin-top: 60px;
@@ -529,16 +358,7 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .lap-counter-overlay {
-                position: relative;
-                top: 0;
-                right: 0;
-                margin: 0 auto 30px;
-                max-width: 300px;
-            }
-
             .header h1 {
                 font-size: 2rem;
             }
@@ -561,99 +381,78 @@
     <div class="bg-grid"></div>
     <div class="bg-glow"></div>
 
-    <!-- Overlay Compteur de Longueurs -->
-    <div class="lap-counter-overlay" id="lapCounter">
-        <div class="lap-counter-label">🏊 LONGUEURS</div>
-        <div class="lap-counter-number" id="lapNumber">0</div>
-        <div class="lap-counter-buttons">
-            <button class="lap-btn remove" onclick="removeLap(event)">-</button>
-            <button class="lap-btn add" onclick="addLap(event)">+</button>
-        </div>
-        <button class="lap-btn reset" onclick="resetLaps(event)">Reset</button>
-        <div class="lap-counter-hint">Cliquez pour ajouter</div>
-    </div>
-
     <div class="container">
-        <!-- Header -->
         <header class="header">
-            <h1>🎮 Donation Goals</h1>
-            <p class="subtitle">Soutenez le Stream • Débloquez les Défis</p>
+            <h1>Donation Goals</h1>
+            <p class="subtitle">Soutenez le Stream - Debloquez les Defis</p>
         </header>
 
-        <!-- Info Réveil -->
         <div class="wake-up-info">
-            <h2>⏰ DONS DE RÉVEIL NOCTURNE ⏰</h2>
-            <p><strong>2 à 3 fois par semaine</strong>, des dons peuvent me réveiller en pleine nuit ! 😴💥</p>
+            <h2>DONS DE REVEIL NOCTURNE</h2>
+            <p><strong>2 a 3 fois par semaine</strong>, des dons peuvent me reveiller en pleine nuit !</p>
         </div>
 
-        <!-- Section Donations Individuelles -->
         <section>
-            <h2 class="section-title donations">💎 Paliers de Dons</h2>
+            <h2 class="section-title donations">Paliers de Dons</h2>
             <div class="donations-grid">
                 <div class="donation-card">
                     <span class="donation-icon">🍔</span>
-                    <div class="donation-amount">50<span>€</span></div>
-                    <p class="donation-reward">Vidéo dégustation à regarder <strong>(1 minute)</strong> - Je regarde sans pouvoir manger ! 😩</p>
+                    <div class="donation-amount">50<span>EUR</span></div>
+                    <p class="donation-reward">Video degustation a regarder <strong>(1 minute)</strong> - Je regarde sans pouvoir manger !</p>
                 </div>
 
                 <div class="donation-card">
                     <span class="donation-icon">🏊</span>
-                    <div class="donation-amount">100<span>€</span></div>
-                    <p class="donation-reward"><strong>10 longueurs</strong> de piscine à faire ! 💦</p>
+                    <div class="donation-amount">100<span>EUR</span></div>
+                    <p class="donation-reward"><strong>10 longueurs</strong> de piscine a faire !</p>
                 </div>
 
                 <div class="donation-card">
                     <span class="donation-icon">🏊‍♂️</span>
-                    <div class="donation-amount">200<span>€</span></div>
-                    <p class="donation-reward"><strong>20 longueurs</strong> de piscine - Double dose ! 🔥</p>
+                    <div class="donation-amount">200<span>EUR</span></div>
+                    <p class="donation-reward"><strong>20 longueurs</strong> de piscine - Double dose !</p>
                 </div>
 
                 <div class="donation-card">
                     <span class="donation-icon">🚶</span>
-                    <div class="donation-amount">300<span>€</span></div>
-                    <p class="donation-reward"><strong>500 mètres</strong> de marche obligatoire 👟</p>
+                    <div class="donation-amount">300<span>EUR</span></div>
+                    <p class="donation-reward"><strong>500 metres</strong> de marche obligatoire</p>
                 </div>
 
                 <div class="donation-card">
                     <span class="donation-icon">💪</span>
-                    <div class="donation-amount">400<span>€</span></div>
-                    <p class="donation-reward">Gainage <strong>jusqu'à tomber</strong> ! 😵 Pas de limite !</p>
+                    <div class="donation-amount">400<span>EUR</span></div>
+                    <p class="donation-reward">Gainage <strong>jusqu'a tomber</strong> ! Pas de limite !</p>
                 </div>
 
                 <div class="donation-card">
                     <span class="donation-icon">💪</span>
-                    <div class="donation-amount">500<span>€</span></div>
-                    <p class="donation-reward">TREND TIK-TOK <strong>à 3 nulle</strong> ! 😵 Pas de limite !</p>
+                    <div class="donation-amount">500<span>EUR</span></div>
+                    <p class="donation-reward">TREND TIK-TOK <strong>a 3 nulle</strong> ! Pas de limite !</p>
                 </div>
 
                 <div class="donation-card special">
                     <span class="donation-icon">🤝</span>
-                    <div class="donation-amount">1000<span>€</span></div>
-                    <p class="donation-reward">Je <strong>double la mise</strong> ! Je donne aussi 1000€ ! 💰✨</p>
+                    <div class="donation-amount">1000<span>EUR</span></div>
+                    <p class="donation-reward">Je <strong>double la mise</strong> ! Je donne aussi 1000EUR !</p>
                 </div>
             </div>
         </section>
 
-        <!-- Section Objectifs Cagnotte -->
         <section class="goals-section">
-            <h2 class="section-title goals">🎯 Objectifs Cagnotte</h2>
+            <h2 class="section-title goals">Objectifs Cagnotte</h2>
 
-            <!-- Tracker Cagnotte -->
             <div class="cagnotte-tracker">
                 <div class="cagnotte-label">CAGNOTTE ACTUELLE</div>
-                <div class="cagnotte-amount" id="cagnotteDisplay">0 €</div>
-                <div class="cagnotte-input-group">
-                    <input type="number" class="cagnotte-input" id="cagnotteInput" placeholder="Montant" min="0">
-                    <button class="update-btn" onclick="updateCagnotte()">Mettre à jour</button>
-                </div>
+                <div class="cagnotte-amount" id="cagnotteDisplay">0 EUR</div>
             </div>
 
             <div class="goal-item">
                 <div class="goal-header">
-                    <div class="goal-amount"><span class="goal-icon">🍕</span>5 000 €</div>
-                    <span class="goal-status locked" id="status-5000">🔒 Verrouillé</span>
+                    <div class="goal-amount"><span class="goal-icon">🍕</span>5 000 EUR</div>
+                    <span class="goal-status locked" id="status-5000">Verrouille</span>
                 </div>
-                <p class="goal-description">Je paie une <strong>ÉNORME pizza</strong>, je la sens et la regarde pendant <strong>10 minutes</strong>... puis je la donne à la régie 😭🍕</p>
+                <p class="goal-description">Je paie une <strong>ENORME pizza</strong>, je la sens et la regarde pendant <strong>10 minutes</strong>... puis je la donne a la regie</p>
                 <div class="goal-progress-bar">
                     <div class="goal-progress-fill" id="progress-5000" style="width: 0%"></div>
                 </div>
@@ -661,10 +460,10 @@
 
             <div class="goal-item">
                 <div class="goal-header">
-                    <div class="goal-amount"><span class="goal-icon">🍽️</span>10 000 €</div>
-                    <span class="goal-status locked" id="status-10000">🔒 Verrouillé</span>
+                    <div class="goal-amount"><span class="goal-icon">🍽️</span>10 000 EUR</div>
+                    <span class="goal-status locked" id="status-10000">Verrouille</span>
                 </div>
-                <p class="goal-description">Je paie le <strong>resto à un random</strong> et je le regarde manger devant moi 👀🥲</p>
+                <p class="goal-description">Je paie le <strong>resto a un random</strong> et je le regarde manger devant moi</p>
                 <div class="goal-progress-bar">
                     <div class="goal-progress-fill" id="progress-10000" style="width: 0%"></div>
                 </div>
@@ -672,10 +471,10 @@
 
             <div class="goal-item">
                 <div class="goal-header">
-                    <div class="goal-amount"><span class="goal-icon">🍟</span>15 000 €</div>
-                    <span class="goal-status locked" id="status-15000">🔒 Verrouillé</span>
+                    <div class="goal-amount"><span class="goal-icon">🍟</span>15 000 EUR</div>
+                    <span class="goal-status locked" id="status-15000">Verrouille</span>
                 </div>
-                <p class="goal-description">Je commande un <strong>truc bien gras</strong>, je le sens... et je le donne à la régie 😤</p>
+                <p class="goal-description">Je commande un <strong>truc bien gras</strong>, je le sens... et je le donne a la regie</p>
                 <div class="goal-progress-bar">
                     <div class="goal-progress-fill" id="progress-15000" style="width: 0%"></div>
                 </div>
@@ -683,10 +482,10 @@
 
             <div class="goal-item">
                 <div class="goal-header">
-                    <div class="goal-amount"><span class="goal-icon">🚭</span>20 000 €</div>
-                    <span class="goal-status locked" id="status-20000">🔒 Verrouillé</span>
+                    <div class="goal-amount"><span class="goal-icon">🚭</span>20 000 EUR</div>
+                    <span class="goal-status locked" id="status-20000">Verrouille</span>
                 </div>
-                <p class="goal-description"><strong>Pas de clope pendant 24H</strong> ! ⏱️ Le défi commence...</p>
+                <p class="goal-description"><strong>Pas de clope pendant 24H</strong> ! Le defi commence...</p>
                 <div class="goal-progress-bar">
                     <div class="goal-progress-fill" id="progress-20000" style="width: 0%"></div>
                 </div>
@@ -694,10 +493,10 @@
 
             <div class="goal-item">
                 <div class="goal-header">
-                    <div class="goal-amount"><span class="goal-icon">🚫</span>25 000 €</div>
-                    <span class="goal-status locked" id="status-25000">🔒 Verrouillé</span>
+                    <div class="goal-amount"><span class="goal-icon">🚫</span>25 000 EUR</div>
+                    <span class="goal-status locked" id="status-25000">Verrouille</span>
                 </div>
-                <p class="goal-description"><strong>PAS DE CLOPE + PAS DE PUFF</strong> ! 💨❌ Le sevrage total !</p>
+                <p class="goal-description"><strong>PAS DE CLOPE + PAS DE PUFF</strong> ! Le sevrage total !</p>
                 <div class="goal-progress-bar">
                     <div class="goal-progress-fill" id="progress-25000" style="width: 0%"></div>
                 </div>
@@ -705,121 +504,29 @@
         </section>
 
         <footer class="footer">
-            <p>💜 Merci pour votre soutien ! Chaque don compte ! 💜</p>
+            <p>Merci pour votre soutien ! Chaque don compte !</p>
         </footer>
     </div>
 
     <script>
-        // Configuration API
         const API_BASE = window.location.origin;
-
-        // Compteur de Longueurs
-        let lapCount = 0;
-        const lapNumberEl = document.getElementById('lapNumber');
-
-        function updateLapDisplay() {
-            lapNumberEl.textContent = lapCount;
-        }
+        let currentCagnotte = 0;
+        const goals = [5000, 10000, 15000, 20000, 25000];
 
         async function fetchData() {
             try {
                 const response = await fetch(`${API_BASE}/api/data`);
                 const data = await response.json();
-                lapCount = data.lapCount || 0;
                 currentCagnotte = data.cagnotte || 0;
-                updateLapDisplay();
-                updateCagnotteDisplay();
+                updateDisplay();
             } catch (error) {
                 console.error('Erreur fetch:', error);
             }
         }
 
-        async function addLap(e) {
-            if (e) e.stopPropagation();
-            try {
-                const response = await fetch(`${API_BASE}/api/lap/add`, { method: 'POST' });
-                const data = await response.json();
-                if (data.success) {
-                    lapCount = data.lapCount;
-                    lapNumberEl.classList.remove('lap-added');
-                    void lapNumberEl.offsetWidth;
-                    lapNumberEl.classList.add('lap-added');
-                    updateLapDisplay();
-                }
-            } catch (error) {
-                console.error('Erreur add lap:', error);
-            }
-        }
-
-        async function removeLap(e) {
-            if (e) e.stopPropagation();
-            try {
-                const response = await fetch(`${API_BASE}/api/lap/remove`, { method: 'POST' });
-                const data = await response.json();
-                if (data.success) {
-                    lapCount = data.lapCount;
-                    updateLapDisplay();
-                }
-            } catch (error) {
-                console.error('Erreur remove lap:', error);
-            }
-        }
-
-        async function resetLaps(e) {
-            if (e) e.stopPropagation();
-            if (confirm('Remettre le compteur à zéro ?')) {
-                try {
-                    const response = await fetch(`${API_BASE}/api/lap/reset`, { method: 'POST' });
-                    const data = await response.json();
-                    if (data.success) {
-                        lapCount = 0;
-                        updateLapDisplay();
-                    }
-                } catch (error) {
-                    console.error('Erreur reset:', error);
-                }
-            }
-        }
-
-        // Click sur l'overlay entier pour ajouter
-        document.getElementById('lapCounter').addEventListener('click', function(e) {
-            if (e.target === this || e.target.classList.contains('lap-counter-label') ||
-                e.target.classList.contains('lap-counter-number') ||
-                e.target.classList.contains('lap-counter-hint')) {
-                addLap();
-            }
-        });
-
-        // Gestion de la Cagnotte
-        let currentCagnotte = 0;
-        const goals = [5000, 10000, 15000, 20000, 25000];
-
-        async function updateCagnotte() {
-            const input = document.getElementById('cagnotteInput');
-            const value = parseFloat(input.value);
-
-            if (!isNaN(value) && value >= 0) {
-                try {
-                    const response = await fetch(`${API_BASE}/api/cagnotte`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ amount: value })
-                    });
-                    const data = await response.json();
-                    if (data.success) {
-                        currentCagnotte = data.cagnotte;
-                        updateCagnotteDisplay();
-                        input.value = '';
-                    }
-                } catch (error) {
-                    console.error('Erreur update cagnotte:', error);
-                }
-            }
-        }
-
-        function updateCagnotteDisplay() {
+        function updateDisplay() {
             document.getElementById('cagnotteDisplay').textContent =
-                currentCagnotte.toLocaleString('fr-FR') + ' €';
+                currentCagnotte.toLocaleString('fr-FR') + ' EUR';
 
             goals.forEach(goal => {
                 const progress = Math.min((currentCagnotte / goal) * 100, 100);
@@ -827,26 +534,16 @@
 
                 const statusEl = document.getElementById(`status-${goal}`);
                 if (currentCagnotte >= goal) {
-                    statusEl.textContent = '✅ DÉBLOQUÉ';
+                    statusEl.textContent = 'DEBLOQUE';
                     statusEl.className = 'goal-status unlocked';
                 } else {
-                    statusEl.textContent = '🔒 Verrouillé';
+                    statusEl.textContent = 'Verrouille';
                     statusEl.className = 'goal-status locked';
                 }
             });
         }
 
-        // Enter key pour mettre à jour
-        document.getElementById('cagnotteInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                updateCagnotte();
-            }
-        });
-
-        // Rafraîchir périodiquement pour sync
         setInterval(fetchData, 3000);
-
-        // Initialisation
         fetchData();
     </script>
 </body>

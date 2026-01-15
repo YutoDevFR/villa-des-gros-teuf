@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Stream Control</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff2d6a;
+            --neon-cyan: #00f0ff;
+            --neon-purple: #b94aff;
+            --neon-green: #00ff88;
+            --neon-red: #ff4444;
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(15, 15, 25, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container, .admin-container {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-purple);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 0 40px rgba(185, 74, 255, 0.3);
+        }
+
+        .admin-container {
+            max-width: 600px;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--neon-purple);
+            text-shadow: 0 0 20px rgba(185, 74, 255, 0.5);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        input[type="password"], input[type="number"] {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(255, 45, 106, 0.5);
+        }
+
+        .btn-success {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+        }
+
+        .btn-danger {
+            background: var(--neon-red);
+            color: #fff;
+        }
+
+        .error {
+            background: rgba(255, 68, 68, 0.2);
+            border: 1px solid var(--neon-red);
+            color: var(--neon-red);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--neon-cyan);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+        }
+
+        .current-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn-group .btn {
+            flex: 1;
+            padding: 12px;
+        }
+
+        .btn-add {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+        }
+
+        .btn-remove {
+            background: var(--neon-pink);
+            color: #fff;
+        }
+
+        .btn-set {
+            background: var(--neon-purple);
+            color: #fff;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-row input {
+            flex: 1;
+        }
+
+        .input-row .btn {
+            width: auto;
+            padding: 15px 25px;
+        }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            border-color: var(--neon-red);
+            color: var(--neon-red);
+        }
+
+        .status {
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .status.success {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--neon-green);
+        }
+
+        .status.error {
+            background: rgba(255, 68, 68, 0.2);
+            color: var(--neon-red);
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div class="login-container" id="loginContainer">
+        <h1>Admin Login</h1>
+        <div class="error hidden" id="loginError"></div>
+        <div class="form-group">
+            <label>Token Admin</label>
+            <input type="password" id="tokenInput" placeholder="Entrez le token admin">
+        </div>
+        <button class="btn btn-primary" onclick="login()">Connexion</button>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-container hidden" id="adminContainer">
+        <button class="logout-btn" onclick="logout()">Deconnexion</button>
+        <h1>Stream Control</h1>
+
+        <!-- Longueurs Section -->
+        <div class="section">
+            <div class="section-title">Longueurs de Piscine</div>
+            <div class="current-value" id="lapDisplay">0</div>
+            <div class="btn-group">
+                <button class="btn btn-remove" onclick="removeLap()">- 1</button>
+                <button class="btn btn-add" onclick="addLap()">+ 1</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-remove" onclick="removeLaps(10)">- 10</button>
+                <button class="btn btn-add" onclick="addLaps(10)">+ 10</button>
+            </div>
+            <div class="input-row">
+                <input type="number" id="lapInput" placeholder="Valeur" min="0">
+                <button class="btn btn-set" onclick="setLaps()">Definir</button>
+            </div>
+        </div>
+
+        <!-- Cagnotte Section -->
+        <div class="section">
+            <div class="section-title">Cagnotte</div>
+            <div class="current-value" id="cagnotteDisplay">0 EUR</div>
+            <div class="input-row">
+                <input type="number" id="cagnotteInput" placeholder="Montant" min="0" step="0.01">
+                <button class="btn btn-set" onclick="setCagnotte()">Definir</button>
+            </div>
+        </div>
+
+        <div class="status hidden" id="statusMessage"></div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin;
+        let adminToken = localStorage.getItem('adminToken') || '';
+
+        // Check if already logged in
+        if (adminToken) {
+            verifyToken();
+        }
+
+        async function login() {
+            const token = document.getElementById('tokenInput').value;
+            if (!token) {
+                showLoginError('Token requis');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/admin/verify`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    adminToken = token;
+                    localStorage.setItem('adminToken', token);
+                    showAdminPanel();
+                    fetchData();
+                } else {
+                    showLoginError(data.error || 'Token invalide');
+                }
+            } catch (error) {
+                showLoginError('Erreur de connexion');
+            }
+        }
+
+        async function verifyToken() {
+            try {
+                const response = await fetch(`${API_BASE}/api/admin/verify`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: adminToken })
+                });
+
+                if (response.ok) {
+                    showAdminPanel();
+                    fetchData();
+                } else {
+                    logout();
+                }
+            } catch {
+                logout();
+            }
+        }
+
+        function logout() {
+            adminToken = '';
+            localStorage.removeItem('adminToken');
+            document.getElementById('loginContainer').classList.remove('hidden');
+            document.getElementById('adminContainer').classList.add('hidden');
+            document.getElementById('tokenInput').value = '';
+        }
+
+        function showAdminPanel() {
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('adminContainer').classList.remove('hidden');
+        }
+
+        function showLoginError(msg) {
+            const errorEl = document.getElementById('loginError');
+            errorEl.textContent = msg;
+            errorEl.classList.remove('hidden');
+        }
+
+        function showStatus(msg, isError = false) {
+            const statusEl = document.getElementById('statusMessage');
+            statusEl.textContent = msg;
+            statusEl.className = `status ${isError ? 'error' : 'success'}`;
+            statusEl.classList.remove('hidden');
+            setTimeout(() => statusEl.classList.add('hidden'), 3000);
+        }
+
+        async function fetchData() {
+            try {
+                const response = await fetch(`${API_BASE}/api/data`);
+                const data = await response.json();
+                document.getElementById('lapDisplay').textContent = data.lapCount || 0;
+                document.getElementById('cagnotteDisplay').textContent =
+                    (data.cagnotte || 0).toLocaleString('fr-FR') + ' EUR';
+            } catch (error) {
+                console.error('Fetch error:', error);
+            }
+        }
+
+        async function apiCall(endpoint, body = {}) {
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${adminToken}`
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                const data = await response.json();
+
+                if (response.status === 401 || response.status === 403) {
+                    showStatus('Session expiree', true);
+                    logout();
+                    return null;
+                }
+
+                if (!response.ok) {
+                    showStatus(data.error || 'Erreur', true);
+                    return null;
+                }
+
+                return data;
+            } catch (error) {
+                showStatus('Erreur de connexion', true);
+                return null;
+            }
+        }
+
+        async function addLap() {
+            const data = await apiCall('/api/admin/lap/add', { count: 1 });
+            if (data) {
+                document.getElementById('lapDisplay').textContent = data.lapCount;
+                showStatus('Longueur ajoutee');
+            }
+        }
+
+        async function addLaps(count) {
+            const data = await apiCall('/api/admin/lap/add', { count });
+            if (data) {
+                document.getElementById('lapDisplay').textContent = data.lapCount;
+                showStatus(`${count} longueurs ajoutees`);
+            }
+        }
+
+        async function removeLap() {
+            const data = await apiCall('/api/admin/lap/remove', { count: 1 });
+            if (data) {
+                document.getElementById('lapDisplay').textContent = data.lapCount;
+                showStatus('Longueur retiree');
+            }
+        }
+
+        async function removeLaps(count) {
+            const data = await apiCall('/api/admin/lap/remove', { count });
+            if (data) {
+                document.getElementById('lapDisplay').textContent = data.lapCount;
+                showStatus(`${count} longueurs retirees`);
+            }
+        }
+
+        async function setLaps() {
+            const input = document.getElementById('lapInput');
+            const value = parseInt(input.value);
+            if (isNaN(value) || value < 0) {
+                showStatus('Valeur invalide', true);
+                return;
+            }
+
+            const data = await apiCall('/api/admin/lap/set', { count: value });
+            if (data) {
+                document.getElementById('lapDisplay').textContent = data.lapCount;
+                input.value = '';
+                showStatus('Longueurs definies');
+            }
+        }
+
+        async function setCagnotte() {
+            const input = document.getElementById('cagnotteInput');
+            const value = parseFloat(input.value);
+            if (isNaN(value) || value < 0) {
+                showStatus('Montant invalide', true);
+                return;
+            }
+
+            const data = await apiCall('/api/admin/cagnotte', { amount: value });
+            if (data) {
+                document.getElementById('cagnotteDisplay').textContent =
+                    data.cagnotte.toLocaleString('fr-FR') + ' EUR';
+                input.value = '';
+                showStatus('Cagnotte mise a jour');
+            }
+        }
+
+        // Enter key handlers
+        document.getElementById('tokenInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') login();
+        });
+
+        document.getElementById('lapInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') setLaps();
+        });
+
+        document.getElementById('cagnotteInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') setCagnotte();
+        });
+
+        // Auto refresh
+        setInterval(fetchData, 5000);
+    </script>
+</body>
+</html>
