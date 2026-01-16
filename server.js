@@ -8,8 +8,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'data', 'data.json');
 
-// Streamlabs Charity API
-const STREAMLABS_API_URL = process.env.STREAMLABS_API_URL || 'https://streamlabscharity.com/api/v1/users/campaigns/teuf/villa-des-gros';
+// Streamlabs Charity API (optionnel - si non défini, gestion manuelle)
+const STREAMLABS_API_URL = process.env.STREAMLABS_API_URL;
 const STREAMLABS_FETCH_INTERVAL = 30000; // 30 secondes
 
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'changeme-in-production';
@@ -154,11 +154,14 @@ async function updateCagnotteFromStreamlabs() {
     }
 }
 
-// Fetch initial au demarrage
-updateCagnotteFromStreamlabs();
-
-// Fetch toutes les 30 secondes
-setInterval(updateCagnotteFromStreamlabs, STREAMLABS_FETCH_INTERVAL);
+// Fetch auto seulement si STREAMLABS_API_URL est défini
+if (STREAMLABS_API_URL) {
+    console.log('Streamlabs auto-fetch actif:', STREAMLABS_API_URL);
+    updateCagnotteFromStreamlabs();
+    setInterval(updateCagnotteFromStreamlabs, STREAMLABS_FETCH_INTERVAL);
+} else {
+    console.log('Streamlabs auto-fetch desactive (STREAMLABS_API_URL non defini) - gestion manuelle');
+}
 
 function readData() {
     try {
