@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'data', 'data.json');
 
 // Streamlabs Charity API
-const STREAMLABS_API_URL = 'https://streamlabscharity.com/api/v1/users/campaigns/teuf/villa-des-gros';
+const STREAMLABS_API_URL = process.env.STREAMLABS_API_URL || 'https://streamlabscharity.com/api/v1/users/campaigns/teuf/villa-des-gros';
 const STREAMLABS_FETCH_INTERVAL = 30000; // 30 secondes
 
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'changeme-in-production';
