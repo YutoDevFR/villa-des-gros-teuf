@@ -8,6 +8,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'data', 'data.json');
 
+// Streamlabs Charity API
+const STREAMLABS_API_URL = 'https://streamlabscharity.com/api/v1/users/campaigns/teuf/villa-des-gros';
+const STREAMLABS_FETCH_INTERVAL = 30000; // 30 secondes
+
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'changeme-in-production';
 
 // Middleware
@@ -111,6 +115,50 @@ function initDataFile() {
 }
 
 initDataFile();
+
+// ============ STREAMLABS AUTO-FETCH ============
+
+async function fetchStreamlabsCagnotte() {
+    try {
+        const response = await fetch(STREAMLABS_API_URL, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (compatible; VillaDesGros/1.0)',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            console.error(`Streamlabs API error: ${response.status}`);
+            return null;
+        }
+
+        const json = await response.json();
+        // amount_raised est en centimes (304195 = 3041.95€)
+        const amountInEuros = json.amount_raised / 100;
+        return amountInEuros;
+    } catch (error) {
+        console.error('Erreur fetch Streamlabs:', error.message);
+        return null;
+    }
+}
+
+async function updateCagnotteFromStreamlabs() {
+    const amount = await fetchStreamlabsCagnotte();
+    if (amount !== null) {
+        const data = readData();
+        if (data.cagnotte !== amount) {
+            data.cagnotte = amount;
+            saveData(data);
+            console.log(`Cagnotte mise a jour depuis Streamlabs: ${amount}€`);
+        }
+    }
+}
+
+// Fetch initial au demarrage
+updateCagnotteFromStreamlabs();
+
+// Fetch toutes les 30 secondes
+setInterval(updateCagnotteFromStreamlabs, STREAMLABS_FETCH_INTERVAL);
 
 function readData() {
     try {
