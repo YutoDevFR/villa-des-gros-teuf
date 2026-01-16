@@ -13,6 +13,7 @@ const STREAMLABS_API_URL = process.env.STREAMLABS_API_URL;
 const STREAMLABS_FETCH_INTERVAL = 30000; // 30 secondes
 
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'changeme-in-production';
+const STREAMER_NAME = process.env.STREAMER_NAME || '';
 
 // Middleware
 app.use(cors());
@@ -191,6 +192,7 @@ function getNextId(items) {
 app.get('/api/data', (req, res) => {
     const data = readData();
     res.json({
+        streamerName: STREAMER_NAME,
         lapCount: data.lapCount,
         lapsDone: data.lapsDone || 0,
         cagnotte: data.cagnotte,

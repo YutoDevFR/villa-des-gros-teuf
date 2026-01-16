@@ -203,6 +203,62 @@
             text-shadow: 0 0 30px rgba(255, 230, 0, 0.7);
         }
 
+        .donation-card.laps-card {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(185, 74, 255, 0.1));
+            border: 2px solid var(--neon-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .donation-card.laps-card::before {
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-cyan));
+            background-size: 200% 100%;
+            animation: shimmer 2s linear infinite;
+        }
+
+        .laps-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .laps-stat {
+            text-align: center;
+        }
+
+        .laps-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .laps-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+
+        .laps-value.todo {
+            color: var(--neon-pink);
+            text-shadow: 0 0 20px rgba(255, 45, 106, 0.5);
+        }
+
+        .laps-value.done {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+        }
+
+        .laps-separator {
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(180deg, transparent, var(--neon-purple), transparent);
+        }
+
         .goals-section { margin-top: 60px; }
 
         .goal-item {
@@ -381,21 +437,46 @@
         let currentCagnotte = 0;
         let donations = [];
         let goals = [];
+        let streamerName = '';
+        let lapCount = 0;
+        let lapsDone = 0;
 
-        function renderDonations(donations) {
+        function renderDonations(donations, streamerName, lapCount, lapsDone) {
             const container = document.getElementById('donations-container');
             if (!donations || donations.length === 0) {
                 container.innerHTML = '<div class="loading">Aucun palier configure</div>';
                 return;
             }
 
-            container.innerHTML = donations.map(d => `
+            let html = donations.map(d => `
                 <div class="donation-card ${d.special ? 'special' : ''}">
                     <span class="donation-icon">${d.icon}</span>
                     <div class="donation-amount">${d.amount}<span>EUR</span></div>
                     <p class="donation-reward">${d.description}</p>
                 </div>
             `).join('');
+
+            // Carte longueurs seulement si streamerName === "Teuf"
+            if (streamerName === 'Teuf') {
+                html += `
+                    <div class="donation-card laps-card">
+                        <span class="donation-icon">🏊</span>
+                        <div class="laps-content">
+                            <div class="laps-stat">
+                                <div class="laps-label">A FAIRE</div>
+                                <div class="laps-value todo">${lapCount}</div>
+                            </div>
+                            <div class="laps-separator"></div>
+                            <div class="laps-stat">
+                                <div class="laps-label">FAITES</div>
+                                <div class="laps-value done">${lapsDone}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
         }
 
         function renderGoals(goals, cagnotte) {
@@ -437,10 +518,20 @@
                 document.getElementById('cagnotteDisplay').textContent =
                     currentCagnotte.toLocaleString('fr-FR') + ' EUR';
 
-                // Update donations if changed
-                if (JSON.stringify(data.donations) !== JSON.stringify(donations)) {
+                const newStreamerName = data.streamerName || '';
+                const newLapCount = data.lapCount || 0;
+                const newLapsDone = data.lapsDone || 0;
+
+                // Update donations if changed (or laps changed for Teuf)
+                const donationsChanged = JSON.stringify(data.donations) !== JSON.stringify(donations);
+                const lapsChanged = newLapCount !== lapCount || newLapsDone !== lapsDone || newStreamerName !== streamerName;
+
+                if (donationsChanged || lapsChanged) {
                     donations = data.donations || [];
-                    renderDonations(donations);
+                    streamerName = newStreamerName;
+                    lapCount = newLapCount;
+                    lapsDone = newLapsDone;
+                    renderDonations(donations, streamerName, lapCount, lapsDone);
                 }
 
                 // Update goals if changed
