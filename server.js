@@ -14,6 +14,7 @@ const STREAMLABS_FETCH_INTERVAL = 30000; // 30 secondes
 
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'changeme-in-production';
 const STREAMER_NAME = process.env.STREAMER_NAME || '';
+const DONATION_URL = process.env.DONATION_URL || '';
 
 // Middleware
 app.use(cors());
@@ -193,6 +194,7 @@ app.get('/api/data', (req, res) => {
     const data = readData();
     res.json({
         streamerName: STREAMER_NAME,
+        donationUrl: DONATION_URL,
         lapCount: data.lapCount,
         lapsDone: data.lapsDone || 0,
         cagnotte: data.cagnotte,

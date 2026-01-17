@@ -369,6 +369,36 @@
             text-shadow: 0 0 30px var(--neon-purple);
         }
 
+        .donate-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 18px 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--dark-bg);
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.5), 0 0 60px rgba(255, 45, 106, 0.3);
+            transition: all 0.3s ease;
+            animation: btnPulse 2s ease-in-out infinite;
+        }
+
+        .donate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(0, 240, 255, 0.8), 0 0 80px rgba(255, 45, 106, 0.5);
+        }
+
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 240, 255, 0.5), 0 0 60px rgba(255, 45, 106, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(0, 240, 255, 0.7), 0 0 80px rgba(255, 45, 106, 0.5); }
+        }
+
         .footer {
             text-align: center;
             margin-top: 60px;
@@ -420,6 +450,7 @@
             <div class="cagnotte-tracker">
                 <div class="cagnotte-label">CAGNOTTE ACTUELLE</div>
                 <div class="cagnotte-amount" id="cagnotteDisplay">0 EUR</div>
+                <div id="donateButtonContainer"></div>
             </div>
 
             <div id="goals-container">
@@ -438,6 +469,7 @@
         let donations = [];
         let goals = [];
         let streamerName = '';
+        let donationUrl = '';
         let lapCount = 0;
         let lapsDone = 0;
 
@@ -509,6 +541,15 @@
             }).join('');
         }
 
+        function renderDonateButton(url) {
+            const container = document.getElementById('donateButtonContainer');
+            if (url) {
+                container.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer" class="donate-btn">Faire un Don</a>`;
+            } else {
+                container.innerHTML = '';
+            }
+        }
+
         async function fetchData() {
             try {
                 const response = await fetch(`${API_BASE}/api/data`);
@@ -519,8 +560,15 @@
                     currentCagnotte.toLocaleString('fr-FR') + ' EUR';
 
                 const newStreamerName = data.streamerName || '';
+                const newDonationUrl = data.donationUrl || '';
                 const newLapCount = data.lapCount || 0;
                 const newLapsDone = data.lapsDone || 0;
+
+                // Update donate button if URL changed
+                if (newDonationUrl !== donationUrl) {
+                    donationUrl = newDonationUrl;
+                    renderDonateButton(donationUrl);
+                }
 
                 // Update donations if changed (or laps changed for Teuf)
                 const donationsChanged = JSON.stringify(data.donations) !== JSON.stringify(donations);
