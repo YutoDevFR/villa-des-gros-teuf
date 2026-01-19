@@ -432,7 +432,7 @@
             <p class="subtitle">Soutenez le Stream - Debloquez les Defis</p>
         </header>
 
-        <div class="wake-up-info">
+        <div class="wake-up-info" id="wake-up-info">
             <h2>DONS DE REVEIL NOCTURNE</h2>
             <p><strong>2 a 3 fois par semaine</strong>, des dons peuvent me reveiller en pleine nuit !</p>
         </div>
@@ -550,6 +550,22 @@
             }
         }
 
+        function renderWakeUpInfo(streamerName) {
+            const container = document.getElementById('wake-up-info');
+            if (streamerName === 'Teuf') {
+                container.innerHTML = `
+                    <h2><s>DONS DE REVEIL NOCTURNE</s></h2>
+                    <p><s><strong>2 a 3 fois par semaine</strong>, des dons peuvent me reveiller en pleine nuit !</s></p>
+                    <p style="margin-top: 15px; font-size: 1.5rem;">Annulé à cause de : 🚭 🏳️‍⚧️ 🦧</p>
+                `;
+            } else {
+                container.innerHTML = `
+                    <h2>DONS DE REVEIL NOCTURNE</h2>
+                    <p><strong>2 a 3 fois par semaine</strong>, des dons peuvent me reveiller en pleine nuit !</p>
+                `;
+            }
+        }
+
         async function fetchData() {
             try {
                 const response = await fetch(`${API_BASE}/api/data`);
@@ -568,6 +584,11 @@
                 if (newDonationUrl !== donationUrl) {
                     donationUrl = newDonationUrl;
                     renderDonateButton(donationUrl);
+                }
+
+                // Update wake-up info if streamer changed
+                if (newStreamerName !== streamerName) {
+                    renderWakeUpInfo(newStreamerName);
                 }
 
                 // Update donations if changed (or laps changed for Teuf)
