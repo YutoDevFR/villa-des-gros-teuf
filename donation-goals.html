@@ -541,13 +541,16 @@
             }).join('');
         }
 
-        function renderDonateButton(url) {
+        function renderDonateButton(url, streamerName) {
             const container = document.getElementById('donateButtonContainer');
+            let html = '';
             if (url) {
-                container.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer" class="donate-btn">Faire un Don</a>`;
-            } else {
-                container.innerHTML = '';
+                html += `<a href="${url}" target="_blank" rel="noopener noreferrer" class="donate-btn">Faire un Don</a>`;
             }
+            if (streamerName === 'Ahmed') {
+                html += `<a href="https://crypto.kick.cx/ahmedlndy" target="_blank" rel="noopener noreferrer" class="donate-btn" style="margin-left: 15px; background: linear-gradient(135deg, #f7931a, #ff2d6a);">Don Crypto</a>`;
+            }
+            container.innerHTML = html;
         }
 
         function renderWakeUpInfo(streamerName) {
@@ -557,6 +560,14 @@
                     <h2><s>DONS DE REVEIL NOCTURNE</s></h2>
                     <p><s><strong>2 a 3 fois par semaine</strong>, des dons peuvent me reveiller en pleine nuit !</s></p>
                     <p style="margin-top: 15px; font-size: 1.5rem;">Annulé à cause de : 🚭 🏳️‍⚧️ 🦧</p>
+                `;
+            } else if (streamerName === 'Ahmed') {
+                container.innerHTML = `
+                    <h2>COMPTEUR DE KILOMETRES</h2>
+                    <p>En plus des défis, <strong>Ahmed doit écouler son compteur de kilomètres !</strong></p>
+                    <p style="margin-top: 15px;">Chaque euro sur KICK rajoute <strong>10 mètres</strong> et un tour de roue qui peut monter jusqu'à <strong>50 mètres supplémentaires</strong>.</p>
+                    <p style="margin-top: 15px;"><em>Exemple : 100 kicks rajoutent 10 mètres et octroient un tour</em></p>
+                    <p><em>1 sub / subgift rajoute 50 mètres et octroie 5 tours</em></p>
                 `;
             } else {
                 container.innerHTML = `
@@ -580,10 +591,10 @@
                 const newLapCount = data.lapCount || 0;
                 const newLapsDone = data.lapsDone || 0;
 
-                // Update donate button if URL changed
-                if (newDonationUrl !== donationUrl) {
+                // Update donate button if URL or streamer changed
+                if (newDonationUrl !== donationUrl || newStreamerName !== streamerName) {
                     donationUrl = newDonationUrl;
-                    renderDonateButton(donationUrl);
+                    renderDonateButton(donationUrl, newStreamerName);
                 }
 
                 // Update wake-up info if streamer changed
