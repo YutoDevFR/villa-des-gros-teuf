@@ -563,11 +563,75 @@
                 `;
             } else if (streamerName === 'Ahmed') {
                 container.innerHTML = `
-                    <h2>COMPTEUR DE KILOMETRES</h2>
-                    <p>En plus des défis, <strong>Ahmed doit écouler son compteur de kilomètres !</strong></p>
-                    <p style="margin-top: 15px;">Chaque euro sur KICK rajoute <strong>10 mètres</strong> et un tour de roue qui peut monter jusqu'à <strong>50 mètres supplémentaires</strong>.</p>
-                    <p style="margin-top: 15px;"><em>Exemple : 100 kicks rajoutent 10 mètres et octroient un tour</em></p>
-                    <p><em>1 sub / subgift rajoute 50 mètres et octroie 5 tours</em></p>
+                    <style>
+                        .ahmed-section { display: flex; flex-direction: column; gap: 20px; text-align: left; }
+                        .ahmed-block { background: rgba(0,0,0,0.25); border-radius: 12px; padding: 20px; }
+                        .ahmed-block-title { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+                        .ahmed-block-title.km { color: var(--neon-cyan); }
+                        .ahmed-block-title.night { color: var(--neon-pink); }
+                        .ahmed-list { display: flex; flex-direction: column; gap: 8px; }
+                        .ahmed-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 3px solid var(--neon-cyan); }
+                        .ahmed-row.night { border-left-color: var(--neon-pink); }
+                        .ahmed-row-left { font-size: 1rem; color: rgba(255,255,255,0.9); }
+                        .ahmed-row-right { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 1.1rem; }
+                        .ahmed-row-right.cyan { color: var(--neon-cyan); }
+                        .ahmed-row-right.pink { color: var(--neon-pink); }
+                        .ahmed-row-right.yellow { color: var(--neon-yellow); }
+                        .ahmed-highlight { display: inline-block; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+                        .ahmed-highlight.tts { background: rgba(255, 230, 0, 0.2); color: var(--neon-yellow); }
+                        .ahmed-subtitle { font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
+                        @media (min-width: 768px) {
+                            .ahmed-section { flex-direction: row; }
+                            .ahmed-block { flex: 1; }
+                        }
+                    </style>
+                    <div class="ahmed-section">
+                        <div class="ahmed-block">
+                            <div class="ahmed-block-title km">🏃 COMPTEUR KILOMETRES</div>
+                            <p class="ahmed-subtitle">Chaque don fait avancer Ahmed !</p>
+                            <div class="ahmed-list">
+                                <div class="ahmed-row">
+                                    <span class="ahmed-row-left">1€ sur KICK</span>
+                                    <span class="ahmed-row-right cyan">+10m + roue</span>
+                                </div>
+                                <div class="ahmed-row">
+                                    <span class="ahmed-row-left">100 kicks</span>
+                                    <span class="ahmed-row-right cyan">+10m + 1 tour</span>
+                                </div>
+                                <div class="ahmed-row">
+                                    <span class="ahmed-row-left">1 sub / subgift</span>
+                                    <span class="ahmed-row-right cyan">+50m + 5 tours</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ahmed-block">
+                            <div class="ahmed-block-title night">🌙 DONS NOCTURNES</div>
+                            <p class="ahmed-subtitle">Réveille Ahmed chaque nuit ! <span class="ahmed-highlight tts">TTS = 15€</span></p>
+                            <div class="ahmed-list">
+                                <div class="ahmed-row night">
+                                    <span class="ahmed-row-left">Sons & Lumières 5s</span>
+                                    <span class="ahmed-row-right pink">5€</span>
+                                </div>
+                                <div class="ahmed-row night">
+                                    <span class="ahmed-row-left">Sons & Lumières 10s</span>
+                                    <span class="ahmed-row-right pink">10€</span>
+                                </div>
+                                <div class="ahmed-row night">
+                                    <span class="ahmed-row-left">Sons & Lumières 20s</span>
+                                    <span class="ahmed-row-right pink">20€</span>
+                                </div>
+                                <div class="ahmed-row night">
+                                    <span class="ahmed-row-left">Sons & Lumières 50s</span>
+                                    <span class="ahmed-row-right pink">50€</span>
+                                </div>
+                                <div class="ahmed-row night">
+                                    <span class="ahmed-row-left">Sons & Lumières 2min</span>
+                                    <span class="ahmed-row-right yellow">100€</span>
+                                </div>
+                            </div>
+                            <p style="margin-top: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.5);">via PayPal ou Crypto</p>
+                        </div>
+                    </div>
                 `;
             } else {
                 container.innerHTML = `
